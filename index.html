@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color" content="#ed3e6f">
+  <title>LOKALUKM</title>
+
+  <!-- UIkit CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/css/uikit.min.css" />
+  <link rel="stylesheet" href="css/ionicons.css">
+  <style>
+    .discover-gradient {
+      width: 100%;
+      height: 345px;
+      position: absolute;
+      background: #8705f0;
+      background: linear-gradient(to bottom right, #ff2e54, #c519e4);
+      margin-top: -45px;
+      z-index: -1;
+    }
+    .discover-gradient svg {
+      position: absolute;
+      bottom: 0;
+      width: calc(100% + 2px);
+      height: 70px;
+    }
+    .block {
+      margin: 0;
+      padding: 0 20px;
+      color: #8A8A8F;
+    }
+    .title-container {
+      margin: 30px 0 10px;
+    }
+    .title-date {
+      color: #8A8A8F;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 13px;
+    }
+    .title-container.white .title-date {
+      color: rgba(255, 255, 255, 0.6);
+    }
+    .title-container.white h1 {
+      color: #fff;
+      font-weight: 700;
+      margin: 0;
+    }
+    .title-container.white i {
+      color: #fff;
+      font-size: 35px;
+    }
+    .title-with-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    i.icon {
+      display: inline-block;
+      vertical-align: middle;
+      background-size: 100% auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      font-style: normal;
+      position: relative;
+    }
+
+    .card {
+      box-shadow: none;
+      margin: 0 0 25px 0;
+    }
+    .card-image {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      border-radius: 15px;
+    }
+    .swiper-container .card {
+      height: 330px;
+    }
+    .swiper-container .card .card-title {
+      font-size: 25px;
+      line-height: 32px;
+    }
+    .card {
+      position: relative;
+      width: 100%;
+      height: 400px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      border-radius: 15px;
+      cursor: pointer;
+      overflow: hidden;
+      background: #fff;
+      -webkit-transition-duration: 0.3s;
+      -moz-transition-duration: 0.3s;
+      -o-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-property: -webkit-transform;
+      -moz-transition-property: -moz-transform;
+      -o-transition-property: -o-transform;
+      transition-property: transform;
+    }
+    .card-info {
+      z-index: 2;
+      padding: 20% 20px 20px 20px;
+      background-image: linear-gradient(to bottom,rgba(0,0,0,0) 0, rgba(0,0,0,0.8) 100%, rgba(0,0,0,0.9) 100%);
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+    }
+    .card-scale {
+      transform: scale(0.95);
+    }
+    .dropshadow-image {
+      position: absolute !important;
+      bottom: -15px;
+      left: 0;
+      -webkit-filter: blur(17px);
+      filter: blur(17px);
+      z-index: 0;
+      transform: scale(0.8);
+      opacity: 0.432;
+    }
+
+    /* title */
+    .title-medium-container {
+      margin-top: 30px;
+      position: relative;
+    }
+    .title-with-link {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .title-medium-container h2 {
+      margin: 0;
+      font-size: 22px;
+      position: relative;
+      padding: 10px 0;
+      font-weight: bold;
+    }
+    .title-medium-container:before {
+      content: '';
+      position: absolute;
+      background-color: #c8c7cc;
+      display: block;
+      z-index: 15;
+      top: 0;
+      right: auto;
+      bottom: auto;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      -webkit-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+    .button {
+      text-decoration: none;
+      text-align: center;
+      display: block;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: 0 0;
+      padding: 0 10px;
+      margin: 0;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: 14px;
+      position: relative;
+      overflow: hidden;
+      font-family: inherit;
+      cursor: pointer;
+      outline: 0;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      vertical-align: middle;
+    }
+    a.button.button-fill {
+      height: 26px;
+      line-height: 22px;
+      border-width: 2px;
+      font-size: 13px;
+      font-weight: 600;
+      text-transform: uppercase;
+      -webkit-transition-duration: .2s;
+      transition-duration: .2s;
+      background: #ff2d55;
+      color: #fff;
+      border-color: transparent;
+      border-radius: 29px;
+    }
+
+    .media-profile {
+      padding: 0;
+    }
+    .media-profile li {
+      list-style: none;
+    }
+    .media-profile li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .media-profile .image-profile {
+      height: 60px;
+      width: 60px;
+      border-radius: 40px;
+      overflow: hidden;
+    }
+    .media-profile .image-profile img {
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+    .media-profile .profile-infos {
+      flex: 1;
+      margin-left: 13px;
+    }
+    .media-profile .profile-name {
+      color: #000;
+      font-size: 19px;
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+    .media-profile .profile-description {
+      font-size: 16px;
+      font-weight: 500;
+      color: #a6a6ab;
+    }
+    .profile-star {
+      color: #ffd12a;
+      font-size: 25px;
+    }
+
+    /* card 2 */
+    .medium-card-slider .card {
+      height: 140px;
+      border-radius: 5px;
+    }
+    .medium-card-slider .card-image {
+      border-radius: 5px;
+    }
+    .medium-card-slider .card {
+      width: 100%;
+      height: 160px;
+      margin: 0;
+      box-shadow: none;
+    }
+    .medium-card-slider .card-info {
+      background: none;
+      color: #000;
+      padding: 8px 8px 0 0;
+      font-weight: 500;
+    }
+    .medium-card-slider .card-info .card-title {
+      color: #000;
+      font-weight: 500;
+      font-size: 18px;
+      line-height: 25px;
+    }
+  </style>
+</head>
+<body>
+  <div class="discover-gradient">
+    <svg viewBox="0 0 100 100" preserveAspectRatio="none">
+      <polygon fill="white" points="0,100 100,0 100,100"></polygon>
+    </svg>
+  </div>
+  <div class="block">
+    <div class="title-container white">
+      <span class="title-date">This Week</span>
+      <div class="title-with-link">
+        <h1>Discover</h1>
+        <i class="icon ion-ios-star"></i>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="sets: true">
+    
+      <ul class="uk-slider-items uk-grid-small swiper-container" uk-scrollspy="target: > li; cls: uk-animation-fade; delay: 300" id="main-container">
+        <!-- main container here -->
+      </ul>
+    
+    </div>
+  </div>
+  <div class="block">
+    <div class="title-medium-container title-with-link">
+      <h2>Popular Authors</h2>
+      <a href="/author-list/" class="col button button-small button-round button-fill">See All</a>
+    </div>
+    <ul class="media-profile" id="profile-container" uk-scrollspy="target: > li; cls: uk-animation-fade; delay: 500">
+      <!-- profiles here -->
+    </ul>
+    <div class="title-medium-container">
+      <h2>The Fashion Week</h2>
+    </div>
+  </div>
+  <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="sets: true">
+    <ul class="uk-slider-items uk-grid-small swiper-container medium-card-slider"
+      uk-scrollspy="target: > li; cls: uk-animation-fade; delay: 300" id="medium-card-container">
+      <!-- card container here -->
+    </ul>
+  </div>
+  
+  <!-- UIkit JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/uikit/3.1.6/js/uikit-icons.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+
+    var timeoutId = 0;
+    var dataMain = [
+      {
+        image: "https://xioyuna.com/envato/yui/demo/Yui/img/thumb-5.jpg",
+        title: "Jeffrey Campbell's New Shoes Models"
+      },
+      {
+        image: "https://xioyuna.com/envato/yui/demo/Yui/img/thumb-19.jpg",
+        title: "Jeffrey Campbell's New Shoes Models"
+      },
+      {
+        image: "https://xioyuna.com/envato/yui/demo/Yui/img/thumb-1.jpg",
+        title: "Jeffrey Campbell's New Shoes Models"
+      },
+      {
+        image: "https://xioyuna.com/envato/yui/demo/Yui/img/thumb-17.jpg",
+        title: "Jeffrey Campbell's New Shoes Models"
+      },
+      {
+        image: "https://xioyuna.com/envato/yui/demo/Yui/img/thumb-8.jpg",
+        title: "Jeffrey Campbell's New Shoes Models"
+      },
+      {
+        image: "https://xioyuna.com/envato/yui/demo/Yui/img/thumb-9.jpg",
+        title: "Jeffrey Campbell's New Shoes Models"
+      },
+    ]
+
+    $('body').on('mousedown touchstart', '.card', function () {
+      $(this).addClass('card-scale');
+    }).on('mouseup mouseleave touchend', '.card', function () {
+      $(this).removeClass('card-scale');
+    });
+
+    function templateMainCard(data) {
+      let template =`<li class="uk-width-3-4">
+        <img class="card-image dropshadow-image" src="${data.image}" alt="">
+        <div class="card">
+          <img class="card-image" src="${data.image}" alt="">
+          <div class="card-info">
+            <h2 class="card-title">${data.title}</h2>
+          </div>
+        </div>
+      </li>`
+      return template
+    }
+
+    function templateProfile(data) {
+      let template = `<li>
+        <a href="/author/${data.id}">
+          <div class="image-profile"><img src="${data.image}" alt=""></div>
+          <div class="profile-infos">
+            <div class="profile-name">${data.name}</div>
+            <div class="profile-description">${data.description}</div>
+          </div>
+          <div class="profile-star"><i class="icon ion-ios-star"></i></div>
+        </a>
+      </li>`
+      return template
+    }
+
+    function templateMediumCard(data) {
+      let template = `<li class="uk-width-3-5">
+        <a href="#" class="uk-link-reset">
+        <div class="card">
+          <img class="card-image" src="${data.image}" alt="">
+        </div>
+        <div class="card-info">
+          <h2 class="card-title">${data.title}</h2>
+        </div>
+        </a>
+      </li>`
+      return template
+    }
+
+    // get data profile
+    // axios.get('http://localhost:9000/table?base_table=Users')
+    axios.get('/.netlify/functions/table?base_table=Users')
+    .then((result) => {
+      let users = result.data.records;
+      users.forEach(function(data) {
+        let obj = data.fields;
+        obj.image = obj.images[0].url || null;
+        $('#profile-container').append(templateProfile(obj));
+      })
+    }).catch((err) => {
+      console.log(err);
+    });
+
+    dataMain.forEach(function(data){
+      $('#main-container').append(templateMainCard(data));
+    });
+    
+    dataMain.forEach(function(data) {
+      $('#medium-card-container').append(templateMediumCard(data));
+    })
+
+
+  </script>
+</body>
+</html>
