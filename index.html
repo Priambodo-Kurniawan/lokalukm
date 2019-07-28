@@ -264,6 +264,119 @@
       font-size: 18px;
       line-height: 25px;
     }
+
+    /* media list */
+    .media-list {
+      margin: -8px 0;
+      padding: 0;
+      list-style: none;
+      font-size: 17px;
+      position: relative;
+    z-index: 1;
+    }
+    .media-list li {
+      position: relative;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+    }
+    .media-list .item-content {
+      padding-left: 0;
+      min-height: 44px;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-pack: justify;
+      -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+      justify-content: space-between;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+    }
+    .media-list .item-media {
+      width: 130px;
+      height: 120px;
+      padding-top: 9px;
+      padding-bottom: 10px;
+      -webkit-align-self: flex-start;
+      -ms-flex-item-align: start;
+      align-self: flex-start;
+      display: -webkit-box;
+      display: -webkit-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+      flex-shrink: 0;
+      -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+      -webkit-box-align: center;
+      -webkit-align-items: center;
+      -ms-flex-align: center;
+      align-items: center;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      padding-bottom: 8px;
+    }
+    .media-list .item-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 5px;
+    }
+    .media-list .item-inner {
+      padding-right: 0;
+      padding-top: 10px;
+      padding-bottom: 9px;
+    }
+    .media-list .item-media+.item-inner {
+      margin-left: 15px;
+    }
+    .media-list .item-subtitle {
+      color: #a6a6ab;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 14px;
+      position: relative;
+      overflow: hidden;
+      white-space: nowrap;
+      max-width: 100%;
+      text-overflow: ellipsis;
+    }
+    .media-list .item-title {
+      margin: 5px 0 6px;
+      color: #000;
+      font-weight: 600;
+      font-size: 18px;
+      line-height: 23px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      white-space: pre-wrap;
+    }
+    .media-list .item-subtitle.bottom-subtitle {
+      display: flex;
+      align-items: center;
+      text-transform: none;
+      font-weight: 500;
+      font-size: 15px;
+    }
+    .media-list .item-subtitle.bottom-subtitle i {
+      font-weight: 500;
+      font-size: 15px;
+      margin-right: 5px;
+      color: #a6a6ab;
+    }
+    .ion-md-time:before {
+      content: "\f394";
+    }
   </style>
 </head>
 <body>
@@ -284,7 +397,7 @@
   <div>
     <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="sets: true">
     
-      <ul class="uk-slider-items uk-grid-small swiper-container" uk-scrollspy="target: > li; cls: uk-animation-fade; delay: 300" id="main-container">
+      <ul class="uk-slider-items uk-grid-small swiper-container" id="main-container">
         <!-- main container here -->
       </ul>
     
@@ -304,8 +417,17 @@
   </div>
   <div class="uk-position-relative uk-visible-toggle uk-light" tabindex="-1" uk-slider="sets: true">
     <ul class="uk-slider-items uk-grid-small swiper-container medium-card-slider"
-      uk-scrollspy="target: > li; cls: uk-animation-fade; delay: 300" id="medium-card-container">
+      id="medium-card-container">
       <!-- card container here -->
+    </ul>
+  </div>
+  <div class="block">
+    <div class="title-medium-container title-with-link">
+      <h2>In Lifestyle</h2>
+      <a href="/category/" class="col button button-small button-round button-fill">See All</a>
+    </div>
+    <ul class="media-list" id="media-list">
+      <!-- media list here -->
     </ul>
   </div>
   
@@ -343,6 +465,26 @@
         image: "https://xioyuna.com/envato/yui/demo/Yui/img/thumb-9.jpg",
         title: "Jeffrey Campbell's New Shoes Models"
       },
+    ]
+    var mediaData = [
+      {
+        image: 'https://xioyuna.com/envato/yui/demo/Yui/img/thumb-25.jpg',
+        title: 'The Best Diet for a Flatter Belly',
+        subtitle: 'Fashon',
+        bottom_subtitle: '2 hours ago'
+      },
+      {
+        image: 'https://xioyuna.com/envato/yui/demo/Yui/img/thumb-26.jpg',
+        title: 'The Best Diet for a Flatter Belly',
+        subtitle: 'Fashon',
+        bottom_subtitle: '2 hours ago'
+      },
+      {
+        image: 'https://xioyuna.com/envato/yui/demo/Yui/img/thumb-27.jpg',
+        title: 'The Best Diet for a Flatter Belly',
+        subtitle: 'Fashon',
+        bottom_subtitle: '2 hours ago'
+      }
     ]
 
     $('body').on('mousedown touchstart', '.card', function () {
@@ -392,6 +534,22 @@
       return template
     }
 
+    function templateMediaList(data) {
+      let template = `<li>
+        <a href="/single/">
+          <div class="item-content">
+            <div class="item-media"><img src="${data.image}" alt=""></div>
+            <div class="item-inner">
+              <div class="item-subtitle">${data.subtitle}</div>
+              <div class="item-title">${data.title}</div>
+              <div class="item-subtitle bottom-subtitle"><i class="icon ion-md-time"></i>${data.bottom_subtitle}</div>
+            </div>
+          </div>
+        </a>
+      </li>`
+      return template
+    }
+
     // get data profile
     // axios.get('http://localhost:9000/table?base_table=Users')
     axios.get('/.netlify/functions/table?base_table=Users')
@@ -412,6 +570,10 @@
     
     dataMain.forEach(function(data) {
       $('#medium-card-container').append(templateMediumCard(data));
+    })
+    
+    mediaData.forEach(function(data) {
+      $('#media-list').append(templateMediaList(data));
     })
 
 
